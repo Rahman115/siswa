@@ -2,7 +2,7 @@
 
 use \modules\controllers\MainController;
 
-class HomeController extends MainController
+class homeController extends MainController
 {
 
     public function index()

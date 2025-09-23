@@ -1,6 +1,9 @@
 <?php
 
 class Controller{
+  
+  protected $models = array();
+  
     protected function view($viewName){
         $view = new View($viewName);
         return $view;
@@ -12,9 +15,27 @@ class Controller{
 	}
 
     protected function model($modelName){
-        require_once ROOT . DS . 'modules' . DS . 'models' . DS . $modelName . 'Model.php';
+        $modelFile = ROOT . DS . 'modules' . DS . 'models' . DS . $modelName . 'Model.php';
+        
+        if (!file_exists($modelFile)) {
+            throw new Exception("Model file not found: " . $modelFile);
+        }
+        
+        require_once $modelFile;
         $className = ucfirst($modelName). 'Model';
-        $this->$modelName = new $className();
+        
+        if (!class_exists($className)) {
+            throw new Exception("Model class not found: " . $className);
+        }
+        
+        $this->models[$modelName] = new $className();
+        
+        return $this->models;
+    }
+
+    // Method khusus untuk mendapatkan model
+    protected function getModel($modelName) {
+        return isset($this->models[$modelName]) ? $this->models[$modelName] : null;
     }
 
     protected function template($viewName, $data = array()){

@@ -11,28 +11,21 @@ require_once "library/model.class.php";
 require_once "library/view.class.php";
 require_once "library/controller.class.php";
 
-spl_autoload_register(function ($className) {
+function __autoload($className) {
 
     $fileName = str_replace("\\", DS, $className) . '.php';
 
     if(!file_exists($fileName)) {
 
         return false;
-    
-    
     }
 
     include $fileName;
-});
+}
 
 //now let begin for make it MVC
 $page = (isset($_GET['page']) && $_GET['page']) ? $_GET['page'] : 'home';
-
 $controller = ROOT . DS . 'modules' . DS . 'controllers' . DS . $page .'Controller.php';
-
-// $controller = DS . 'modules' . DS . 'controllers' . DS . $page .'Controller.php';
-
-// var_dump($controller);
 
 if(file_exists($controller)) {
 

@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Di head -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
   <title>Dashboard E-Learning</title>
 
   <link href="<?php echo PATH; ?>resources/css/style_learning.css" rel="stylesheet">
@@ -12,10 +13,11 @@
 
 <body>
 
-  <header>
+  <header role="banner">
     <!-- <h1>📚 E-Learning Siswa</h1> -->
-    <h1><?php echo $data['title'];?></h1>
-    <nav>
+    <h1><?php echo $data['title'];?>
+    </h1>
+    <nav role="navigation" aria-label="Menu Utama">
       <ul>
         <li><a href="<?php echo PATH; ?>">Dashboard</a></li>
         <li><a href="<?php echo PATH; ?>?page=profil">Profil</a></li>
@@ -37,14 +39,16 @@
     <a href="<?php echo PATH; ?>?page=login&&action=logout">Logout</a>
   </div>
 
-  <div class="container">
+  <main role="main" class="container">
     <?php
     $view = new View($viewName);
     $view->bind('data', $data);
     $view->forceRender();
     ?>
+  </main>
     
-  <footer>
+    
+  <footer role="contentinfo">
     <p>© 2025 E-Learning Siswa</p>
   </footer>
   <script>

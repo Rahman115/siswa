@@ -1,6 +1,6 @@
 <?php
 
-class LoginController extends Controller {
+class loginController extends Controller {
 
     public function index() {
 
@@ -21,21 +21,27 @@ class LoginController extends Controller {
             $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
             $this->model('siswa');
+            
+              
+            // Gunakan getModel() instead of direct property access
+            $siswaModel = $this->getModel('siswa');
 
-            $siswa = $this->siswa->getWhere(array(
-                'username' => $username,
-                'password' => md5($password)
-            ));
+            
+            if ($siswaModel) {
+                $siswa = $siswaModel->getWhere(array(
+                    'username' => $username,
+                    'password' => md5($password)
+                ));
 
-            if (count($siswa) > 0) {
-                $message = array(
-                    'success' => TRUE,
-                    'message' => 'Selamat, anda berhasil login'
-                );
+                if (count($siswa) > 0) {
+                    $message = array(
+                        'success' => TRUE,
+                        'message' => 'Selamat, anda berhasil login'
+                    );
 
-                $_SESSION["login"] = $siswa[0];
-
-                echo '<meta http-equiv="refresh" content="1; url=index.php" >';
+                    $_SESSION["login"] = $siswa[0];
+                    echo '<meta http-equiv="refresh" content="1; url=index.php" >';
+                }
             }
         }
 

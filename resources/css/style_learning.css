@@ -80,6 +80,22 @@ nav ul li a:hover {
 }
 
 @media (max-width: 768px) {
+  /* Tambahkan di media query */
+  .mobile-nav {
+    position: fixed; /* Ganti absolute dengan fixed */
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+  
+  /* Prevent body scroll ketika menu terbuka */
+  body.menu-open {
+    overflow: hidden;
+  }
+  
   nav ul {
     display: none;
   }
@@ -113,7 +129,22 @@ nav ul li a:hover {
     display: block;
     margin: 8px 0;
   }
+  
+  .grid, 
+.materi-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
 }
+  .card {
+padding: 15;
+    margin-bottom: 15;
+  }
+  
+  .profile-card {
+    padding: 20px 50px;
+  }
+} // close @media 768
 
 .container {
   max-width: 1100px;
@@ -127,13 +158,12 @@ h2 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 20px;
-}
-
+} 
 .materi-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
@@ -199,8 +229,6 @@ h2 {
   background: #d1fae5;
   color: #065f46;
 }
-
-
 
 .btn-tugas {
   display: inline-block;
@@ -390,9 +418,6 @@ h2 {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
 }
-
-
-
 
 /* footer */
 footer {
